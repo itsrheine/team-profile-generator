@@ -168,10 +168,23 @@ function addEmployee() {
 function endGenerator() {
     inquirer.prompt([
         {
-            name: 'end message',
-            message: 'Thank you for using the Team Profile Generator'
+            name: 'tables',
+            message: 'These are your team members:'
         }
     ])
+        .then(function () {
+            
+            console.table(this.employee.getInfo());
+
+            inquirer.prompt([
+
+                {
+                    name: 'end',
+                    message: 'Thank you for using the Team Profile Generator'
+                }
+
+            ]);
+        });
 }
 
 initializeGenerator();
