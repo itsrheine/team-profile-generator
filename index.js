@@ -26,37 +26,7 @@ function initializeGenerator() {
 
 // returns to form when they need to add more employees
 function newEmployee() {
-
-    inquirer.prompt([
-        {
-            type: 'text',
-            name: 'name',
-            message: 'What is your name?'
-        },
-        {
-            type: 'text',
-            name: 'id',
-            message: 'What is your employee ID?'
-
-        },
-        {
-            type: 'text',
-            name: 'email',
-            message: 'What is your email address?',
-        }
-    ])
-        .then(function (value) {
-            const name = value.name;
-            const id = value.id;
-            const email = value.email;
-            const employee = new Employee(name, id, email);
-
-            allEmployee.push(employee);
-            chooseRole();
-        })
-}
-
-function chooseRole() {
+    
     inquirer.prompt([
         {
             type: 'list',
@@ -87,6 +57,22 @@ function roleManager() {
     inquirer.prompt([
         {
             type: 'text',
+            name: 'name',
+            message: 'What is your name?'
+        },
+        {
+            type: 'text',
+            name: 'id',
+            message: 'What is your employee ID?'
+
+        },
+        {
+            type: 'text',
+            name: 'email',
+            message: 'What is your email address?',
+        },
+        {
+            type: 'text',
             name: 'number',
             message: `What is your office's phone number?`,
         }
@@ -107,6 +93,22 @@ function roleEngineer() {
     inquirer.prompt([
         {
             type: 'text',
+            name: 'name',
+            message: 'What is your name?'
+        },
+        {
+            type: 'text',
+            name: 'id',
+            message: 'What is your employee ID?'
+
+        },
+        {
+            type: 'text',
+            name: 'email',
+            message: 'What is your email address?',
+        },
+        {
+            type: 'text',
             name: 'github',
             message: `What is your GitHub username?`,
         }
@@ -125,6 +127,22 @@ function roleEngineer() {
 
 function roleIntern() {
     inquirer.prompt([
+        {
+            type: 'text',
+            name: 'name',
+            message: 'What is your name?'
+        },
+        {
+            type: 'text',
+            name: 'id',
+            message: 'What is your employee ID?'
+
+        },
+        {
+            type: 'text',
+            name: 'email',
+            message: 'What is your email address?',
+        },
         {
             type: 'text',
             name: 'school',
@@ -173,7 +191,8 @@ function endGenerator() {
         }
     ])
         .then(function () {
-            
+
+            console.table('Team ')
             console.table(allEmployee);
 
             inquirer.prompt([
