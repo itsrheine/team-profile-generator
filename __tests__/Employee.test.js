@@ -26,9 +26,9 @@ test(`get's employee email value`, () => {
     expect(employee.getEmail()).toBe('me@me');
 });
 
-test(`get's employee overall stats`, () => {
+test(`returns 'Employee'`, () => {
     const employee = new Employee('Dave');
-    employee.description = ('Dave', 123, 'me@me');
+    employee.role = 'Employee'
 
-    expect(employee.getRole()).toEqual(expect.stringContaining(employee.description));
+    expect(employee.getRole()).toBe(employee.role);
 });
