@@ -10,9 +10,9 @@ test(`get's employee github value`, () => {
 
 // test(`get's employee github()`, () => {
 //     const engineer = new Engineer('Dave', '123', 'me@me', 'itsrheine');
-//     engineer.role = 'Engineer'
+//     engineer.github = 'itsrheine'
 
-//     expect(engineer.getRole()).toBe(engineer.role);
+//     expect(engineer.getGithub()).toBe(engineer.github);
 // });
 
 test(`returns 'Engineer'`, () => {
