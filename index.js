@@ -5,6 +5,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
 let allEmployee = [];
+let teamName = [];
 
 function initializeGenerator() {
 
@@ -18,15 +19,14 @@ function initializeGenerator() {
         .then(function (value) {
             const team = value.team;
 
-            allEmployee.push(team);
+            teamName.push(team);
             newEmployee();
         });
-
 };
 
 // returns to form when they need to add more employees
 function newEmployee() {
-    
+
     inquirer.prompt([
         {
             type: 'list',
@@ -179,6 +179,7 @@ function addEmployee() {
 
                 case 'No':
                     endGenerator();
+                    break;
             }
         });
 };
@@ -187,12 +188,11 @@ function endGenerator() {
     inquirer.prompt([
         {
             name: 'tables',
-            message: 'These are your team members: (Press Enter)'
+            message: `Here are the members of Team ` + teamName + '!  (Press Enter)',
         }
     ])
         .then(function () {
 
-            console.table('Team ')
             console.table(allEmployee);
 
             inquirer.prompt([
@@ -201,6 +201,7 @@ function endGenerator() {
                     name: 'end',
                     message: 'Thank you for using the Team Profile Generator'
                 }
+                
 
             ]);
         });
