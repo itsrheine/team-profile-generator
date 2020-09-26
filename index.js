@@ -47,7 +47,7 @@ function newEmployee() {
     ])
         .then(function (value) {
             const name = value.name;
-            const id = 123;
+            const id = value.id;
             const email = value.email;
             const employee = new Employee(name, id, email);
 
@@ -80,7 +80,7 @@ function chooseRole() {
                     roleIntern();
                     break;
             }
-        });
+        })
 }
 
 function roleManager() {
@@ -93,7 +93,7 @@ function roleManager() {
     ])
         .then(function (value) {
             const name = value.name;
-            const id = 123;
+            const id = value.id;
             const email = value.email;
             const number = value.number;
             const employee = new Manager(name, id, email, number);
@@ -113,7 +113,7 @@ function roleEngineer() {
     ])
         .then(function (value) {
             const name = value.name;
-            const id = 123;
+            const id = value.id;
             const email = value.email;
             const github = value.github;
             const employee = new Engineer(name, id, email, github);
@@ -133,7 +133,7 @@ function roleIntern() {
     ])
         .then(function (value) {
             const name = value.name;
-            const id = 123;
+            const id = value.id;
             const email = value.email;
             const school = value.school;
             const employee = new Intern(name, id, email, school);
@@ -169,12 +169,12 @@ function endGenerator() {
     inquirer.prompt([
         {
             name: 'tables',
-            message: 'These are your team members:'
+            message: 'These are your team members: (Press Enter)'
         }
     ])
         .then(function () {
             
-            console.table(this.employee.getInfo());
+            console.table(allEmployee);
 
             inquirer.prompt([
 
