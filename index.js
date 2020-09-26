@@ -15,7 +15,7 @@ function initializeGenerator() {
             message: 'What is your Team Name?'
         }
     ])
-        .then(function(value) {
+        .then(function (value) {
             const team = value.team;
 
             allEmployee.push(team);
@@ -43,25 +43,44 @@ function newEmployee() {
             type: 'text',
             name: 'email',
             message: 'What is your email address?',
-        },
+        }
+    ])
+        .then(function (value) {
+            const name = value.name;
+            const id = 123;
+            const email = value.email;
+            const employee = new Employee(name, id, email);
+
+            allEmployee.push(employee);
+            chooseRole();
+        })
+}
+
+function chooseRole() {
+    inquirer.prompt([
         {
-            type: 'checkbox',
+            type: 'list',
             name: 'role',
             message: 'What is your role as an employee?',
             choices: ['Manager', 'Engineer', 'Intern'],
+        }
+    ])
+        .then(function (value) {
+            switch (value.role) {
 
-        }])
-        .then(userChoice => {
-            if (userChoice.role === 'Manager') {
-                roleManager();
-            } 
-            else if (userChoice.role === 'Engineer') {
-                roleEngineer();
+                case 'Manager':
+                    roleManager();
+                    break;
+
+                case 'Engineer':
+                    roleEngineer();
+                    break;
+
+                case 'Intern':
+                    roleIntern();
+                    break;
             }
-            else if (userChoice.role === 'Intern') {
-                roleIntern();
-            }
-        })
+        });
 }
 
 function roleManager() {
@@ -72,15 +91,16 @@ function roleManager() {
             message: `What is your office's phone number?`,
         }
     ])
-    .then(function(value) {
-        const name = value.name;
-        const id = 123;
-        const email = value.email;
-        const employee = new Manager(name, id, email, number);
+        .then(function (value) {
+            const name = value.name;
+            const id = 123;
+            const email = value.email;
+            const number = value.number;
+            const employee = new Manager(name, id, email, number);
 
-        allEmployee.push(employee);
-        addEmployee();
-    });
+            allEmployee.push(employee);
+            addEmployee();
+        });
 };
 
 function roleEngineer() {
@@ -91,15 +111,16 @@ function roleEngineer() {
             message: `What is your GitHub username?`,
         }
     ])
-    .then(function(value) {
-        const name = value.name;
-        const id = 123;
-        const email = value.email;
-        const employee = new Manager(name, id, email, number);
+        .then(function (value) {
+            const name = value.name;
+            const id = 123;
+            const email = value.email;
+            const github = value.github;
+            const employee = new Manager(name, id, email, github);
 
-        allEmployee.push(employee);
-        addEmployee();
-    });
+            allEmployee.push(employee);
+            addEmployee();
+        });
 };
 
 function roleIntern() {
@@ -110,15 +131,47 @@ function roleIntern() {
             message: `What is the name of the school you are currently attending?`,
         }
     ])
-    .then(function(value) {
-        const name = value.name;
-        const id = 123;
-        const email = value.email;
-        const employee = new Intern(name, id, email, school);
+        .then(function (value) {
+            const name = value.name;
+            const id = 123;
+            const email = value.email;
+            const school = value.school;
+            const employee = new Intern(name, id, email, school);
 
-        allEmployee.push(employee);
-        addEmployee();
-    });
+            allEmployee.push(employee);
+            addEmployee();
+        });
 };
+
+function addEmployee() {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'add',
+            message: 'Would you like to add more employees?',
+            choices: ['Yes', 'No'],
+        }
+    ])
+        .then(function (value) {
+            switch (value.add) {
+
+                case 'Yes':
+                    newEmployee();
+                    break;
+
+                case 'No':
+                    endGenerator();
+                    break;
+            }
+        });
+};
+
+function endGenerator() {
+    inquirer.prompt([
+        {
+            message: 'Thank you for using the Team Profile Generator'
+        }
+    ])
+}
 
 initializeGenerator();
