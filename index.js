@@ -161,7 +161,6 @@ function addEmployee() {
 
                 case 'No':
                     endGenerator();
-                    break;
             }
         });
 };
@@ -169,6 +168,7 @@ function addEmployee() {
 function endGenerator() {
     inquirer.prompt([
         {
+            name: 'end message',
             message: 'Thank you for using the Team Profile Generator'
         }
     ])
