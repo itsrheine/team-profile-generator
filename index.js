@@ -116,7 +116,7 @@ function roleEngineer() {
             const id = 123;
             const email = value.email;
             const github = value.github;
-            const employee = new Manager(name, id, email, github);
+            const employee = new Engineer(name, id, email, github);
 
             allEmployee.push(employee);
             addEmployee();
