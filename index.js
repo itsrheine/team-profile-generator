@@ -1,4 +1,6 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
+
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
@@ -7,7 +9,7 @@ const Intern = require('./lib/Intern');
 let allEmployee = [];
 let teamName = [];
 
-function initializeGenerator() {
+const initializeGenerator = () => {
 
     inquirer.prompt([
         {
@@ -199,12 +201,96 @@ function endGenerator() {
 
                 {
                     name: 'end',
-                    message: 'Thank you for using the Team Profile Generator'
+                    message: 'Thank you for using the Team Profile Generator',
                 }
-                
-
             ]);
+
+            generatePage();
+
         });
+}
+
+function generatePage() {
+    // Start HTML
+    const htmlEmployee = [];
+    const pageHTMLheader = `
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team ${teamName}</title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <header class="bg-info">
+        <div class="p-4">
+            <h1>Team ${teamName}</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card text-white bg-info mb-3 mt-5" style="max-width: 18rem;">
+            <div class="card-header">`;
+
+    htmlEmployee.push(pageHTMLheader);
+
+    for (let i = 0; i < allEmployee.length; i++) {
+
+        let employee = `
+                <p>${allEmployee[i].name}</p>
+                <p>${allEmployee[i].role}</p>
+            </div>
+            <div class="card-body bg-light text-dark">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">${allEmployee[i].id}</li>
+                    <li class="list-group-item"><a class="card-text text-dark" id="email" href="mailto:${allEmployee[i].email}">${allEmployee[i].email}</a></li>
+                `;
+        // manager
+        if (allEmployee[i].number) {
+            employee += `
+                    <li class="list-group-item">id: ${allEmployee[i].number}</li>
+                </ul>`
+        }
+        // engineer
+        if (allEmployee[i].github) {
+            employee += `
+                    <li class="list-group-item">GitHub: ${allEmployee[i].github}</li>
+                </ul>`
+        }
+        // intern
+        if (allEmployee[i].school) {
+            employee += `
+                    <li class="list-group-item">School: ${allEmployee[i].school}</li>
+                </ul>`
+        }
+
+        htmlEmployee.push(employee);
+    }
+
+    const pageHTMLfooter = `
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+    `;
+    htmlEmployee.push(pageHTMLfooter);
+
+    fs.writeFile('./dist/index.html', htmlEmployee.join(''), err => {
+        // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+        if (err) {
+            reject(err);
+            // return out of the function here to make sure the Promise doesn't accidentally execute the resolve() function as well
+            return;
+        }
+    })
 }
 
 initializeGenerator();

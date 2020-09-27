@@ -1,0 +1,12 @@
+body {
+  color: #555;
+  margin: 0;
+}
+#header {
+  background-color: #1abc9c;
+  height: 150px;
+  line-height: 150px;
+}
+.card-body #email {
+    color: white;
+}
