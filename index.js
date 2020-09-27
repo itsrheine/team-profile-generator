@@ -220,11 +220,11 @@ function generatePage() {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Team ${teamName}</title>
-        <link rel="stylesheet" type="text/css" href="./style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     </head>
     <body>
     <header class="bg-info">
@@ -243,42 +243,47 @@ function generatePage() {
         let employee = `
             <div class="card text-white bg-info mb-3 mt-5 mb-0" style="max-width: 18rem;">
                 <div class="card-header">  
-                    <p class="h3">${allEmployee[i].name}</p>`
-        // role icon
-        if (allEmployee[i].role) {
-            employee += `<p class="h4">${allEmployee[i].role}</p>`
+                    <p class="h3">${allEmployee[i].name}</p>`;
+
+        // icon 
+        if (allEmployee[i].role === 'Manager') {
+            employee += `          
+                    <p class="h4"><i class="fas fa-mug-hot"></i>  ${allEmployee[i].role}</p>`
         }
-        const pageHTMLicon = `
+        if (allEmployee[i].role === 'Engineer') {
+            employee += `          
+                    <p class="h4"><i class="fas fa-glasses"></i>  ${allEmployee[i].role}</p>`
+        }
+        if (allEmployee[i].role === 'Intern') {
+            employee += `          
+                    <p class="h4"><i class="fas fa-user-graduate"></i>  ${allEmployee[i].role}</p>`
+        }
+        employee += `
                 </div>
                 <div class="card-body bg-light text-dark mb-0">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">id: ${allEmployee[i].id}</li>
                         <li class="list-group-item"><a class="card-text text-dark" id="email" href="mailto:${allEmployee[i].email}">Email: ${allEmployee[i].email}</a></li>`;
-        
+
         // manager
         if (allEmployee[i].number) {
             employee += `
-                        <li class="list-group-item">Office: ${allEmployee[i].number}</li>
-                   </ul>
-                </div>
-            </div>`
+                    <li class="list-group-item">Office: ${allEmployee[i].number}</li>`
         }
         // engineer
         if (allEmployee[i].github) {
             employee += `
-                        <li class="list-group-item">GitHub: <a target="_blank" href="https://www.github.com/${allEmployee[i].github}">${allEmployee[i].github}</a></li>
-                   </ul>
-                </div>
-            </div>`
+                    <li class="list-group-item">GitHub: <a target="_blank" href="https://www.github.com/${allEmployee[i].github}">${allEmployee[i].github}</a></li>`
         }
         // intern
         if (allEmployee[i].school) {
             employee += `
-                        <li class="list-group-item">School: ${allEmployee[i].school}</li>
-                    </ul>
-                </div>
-            </div>`
+                    <li class="list-group-item">School: ${allEmployee[i].school}</li>`
         }
+        employee += `
+                </ul>
+            </div>
+        </div>`
 
         htmlEmployee.push(employee);
     }
