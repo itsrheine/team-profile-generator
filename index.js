@@ -228,55 +228,63 @@ function generatePage() {
     </head>
     <body>
     <header class="bg-info">
-        <div class="p-4">
+        <div class="p-4 text-white text-center">
             <h1>Team ${teamName}</h1>
         </div>
     </header>
 
     <div class="container">
-        <div class="card text-white bg-info mb-3 mt-5" style="max-width: 18rem;">
-            <div class="card-header">`;
+        <div class="card-deck row">`;
 
     htmlEmployee.push(pageHTMLheader);
 
     for (let i = 0; i < allEmployee.length; i++) {
 
         let employee = `
-                <p>${allEmployee[i].name}</p>
-                <p>${allEmployee[i].role}</p>
-            </div>
-            <div class="card-body bg-light text-dark">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">${allEmployee[i].id}</li>
-                    <li class="list-group-item"><a class="card-text text-dark" id="email" href="mailto:${allEmployee[i].email}">${allEmployee[i].email}</a></li>
-                `;
+            <div class="card text-white bg-info mb-3 mt-5 mb-0" style="max-width: 18rem;">
+                <div class="card-header">  
+                    <p class="h3">${allEmployee[i].name}</p>`
+        // role icon
+        if (allEmployee[i].role) {
+            employee += `<p class="h4">${allEmployee[i].role}</p>`
+        }
+        const pageHTMLicon = `
+                </div>
+                <div class="card-body bg-light text-dark mb-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">id: ${allEmployee[i].id}</li>
+                        <li class="list-group-item"><a class="card-text text-dark" id="email" href="mailto:${allEmployee[i].email}">Email: ${allEmployee[i].email}</a></li>`;
+        
         // manager
         if (allEmployee[i].number) {
             employee += `
-                    <li class="list-group-item">id: ${allEmployee[i].number}</li>
-                </ul>`
+                        <li class="list-group-item">Office: ${allEmployee[i].number}</li>
+                   </ul>
+                </div>
+            </div>`
         }
         // engineer
         if (allEmployee[i].github) {
             employee += `
-                    <li class="list-group-item">GitHub: ${allEmployee[i].github}</li>
-                </ul>`
+                        <li class="list-group-item">GitHub: <a target="_blank" href="https://www.github.com/${allEmployee[i].github}">${allEmployee[i].github}</a></li>
+                   </ul>
+                </div>
+            </div>`
         }
         // intern
         if (allEmployee[i].school) {
             employee += `
-                    <li class="list-group-item">School: ${allEmployee[i].school}</li>
-                </ul>`
+                        <li class="list-group-item">School: ${allEmployee[i].school}</li>
+                    </ul>
+                </div>
+            </div>`
         }
 
         htmlEmployee.push(employee);
     }
 
     const pageHTMLfooter = `
-            </div>
         </div>
-        </div>
-    </div>
     </div>
 </body>
 </html>
