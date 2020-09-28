@@ -262,7 +262,7 @@ function generatePage() {
                 </div>
                 <div class="card-body bg-light text-dark mb-0">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">id: ${allEmployee[i].id}</li>
+                        <li class="list-group-item">ID: ${allEmployee[i].id}</li>
                         <li class="list-group-item"><a class="card-text text-dark" id="email" href="mailto:${allEmployee[i].email}">Email: ${allEmployee[i].email}</a></li>`;
 
         // manager
