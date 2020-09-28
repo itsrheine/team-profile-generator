@@ -1,5 +1,5 @@
 # Team Profile Generator
-This Team Profile Generator is a Node.js command=line application
+This Team Profile Generator is a Node.js command-line application
 
 ## Installation
 In order to get to the generator questionnaire, you must first download the repository 'team-profile-generator' by clicking the GitHub link under the 'Link to Repository' section. 
