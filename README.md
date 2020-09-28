@@ -12,6 +12,7 @@ Open your team's profile is generated, right-click 'index.html' and choose 'Open
 * Node.js
 * ES6
 * npm inquirer
+* Jest
 * HTML
 * Bootstrap 4
 * https://fontawesome.com/
